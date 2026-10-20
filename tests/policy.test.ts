@@ -18,12 +18,19 @@ test("tabla y RPC permitidas pasan; las demás, 403", () => {
 test("flujo de dinero: sólo la vista y las funciones flujo_*; las tablas no se tocan directo", () => {
   assert.equal(decidir("GET", "/rest/v1/v_flujo_dinero").ok, true);
   for (const f of ["flujo_recibir", "flujo_confirmar_caja", "flujo_aplicar", "flujo_rechazar", "flujo_mis_capacidades",
-    "flujo_listar_capacidades", "flujo_asignar_capacidad", "flujo_cuentas", "flujo_clientes", "flujo_remisiones_para_aplicar"]) {
+    "flujo_listar_perfiles", "flujo_asignar_perfil", "flujo_catalogo_perfiles", "flujo_cuentas", "flujo_clientes", "flujo_remisiones_para_aplicar"]) {
     assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
   }
   assert.equal(decidir("GET", "/rest/v1/flujo_dinero").status, 403);
   assert.equal(decidir("PATCH", "/rest/v1/flujo_dinero").status, 403);
-  assert.equal(decidir("GET", "/rest/v1/flujo_capacidades").status, 403);
+  // Una sola forma de dar la etapa: el perfil. La marca por persona ya no existe ni se puede llamar.
+  for (const f of ["flujo_asignar_capacidad", "flujo_listar_capacidades", "perfiles_flujo_fijar"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).status, 403, f);
+  }
+  for (const t of ["flujo_capacidades", "perfiles_flujo", "usuario_perfiles_flujo", "usuario_perfiles_flujo_bitacora"]) {
+    assert.equal(decidir("GET", `/rest/v1/${t}`).status, 403, t);
+    assert.equal(decidir("POST", `/rest/v1/${t}`).status, 403, t);
+  }
   assert.equal(decidir("POST", "/rest/v1/rpc/flujo_dinero_sin_borrar").status, 403);
 });
 
