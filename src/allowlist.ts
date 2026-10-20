@@ -40,7 +40,7 @@ export const RPCS = new Set([
   "marcar_remision_entregada", "marcar_unidad_entregada", "proponer_fecha_entrega",
   "programar_entrega_remision_refaccion", "puede_aplicar_saldo_favor", "puede_asignar_remisiones", "puede_cargar_remisiones_anteriores",
   "puede_compras_inventario", "puede_editar_todas_remisiones", "puede_ver_almacen_refacciones",
-  "reabrir_incidencia_chasis", "recibir_contenedor", "recibo_pago_cobranza", "registrar_conexion", "resolver_solicitud_aprobacion", "solicitar_aprobacion", "super_admins_ids",
+  "reabrir_incidencia_chasis", "recibir_contenedor", "recibo_pago_cobranza", "registrar_conexion", "resolver_solicitud_aprobacion", "eliminar_solicitud_aprobacion", "solicitar_aprobacion", "super_admins_ids",
   "registrar_guia_remision_refaccion", "reportar_faltante_refaccion", "reportar_incidencia_chasis",
   "resolver_incidencia_chasis", "responder_solicitud", "resumen_rotacion_refacciones",
   "revisar_incidencia_chasis", "saldo_favor_disponible_cliente", "saldo_refaccion_a_fecha",
