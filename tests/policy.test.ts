@@ -92,3 +92,11 @@ test("firmas electrónicas: tablas, bucket y la función firmas con sesión", ()
   assert.equal(f.requiereSesion, true);
   assert.equal(decidir("GET", "/rest/v1/firmas_usuario").status, 403);
 });
+
+test("Paquete 1: el catálogo básico de clientes (RPC) pasa; la tabla de clientes sigue protegida por la base, no por la compuerta", () => {
+  assert.equal(decidir("POST", "/rest/v1/rpc/catalogo_clientes_basico").ok, true);
+  assert.equal(decidir("GET", "/rest/v1/rpc/catalogo_clientes_basico").ok, true);
+  // las funciones auxiliares del paquete (triggers) no son RPC del front
+  assert.equal(decidir("POST", "/rest/v1/rpc/es_vendedor_comercial").status, 403);
+  assert.equal(decidir("POST", "/rest/v1/rpc/clientes_asignar_vendedor_al_crear").status, 403);
+});
