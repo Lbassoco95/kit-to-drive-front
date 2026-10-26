@@ -93,8 +93,8 @@ test("firmas electrónicas: tablas, bucket y la función firmas con sesión", ()
   assert.equal(decidir("GET", "/rest/v1/firmas_usuario").status, 403);
 });
 
-test("Paquete 2: las tres RPC de reportes y buscadores pasan; las originales siguen; ninguna escritura nueva", () => {
-  for (const f of ["reporte_ventas_refacciones", "kardex_refacciones_multi", "resumen_rotacion_refacciones_filtrado", "kardex_refaccion", "resumen_rotacion_refacciones"]) {
+test("Paquete 2: las cuatro RPC de reportes y buscadores pasan; las originales siguen; ninguna escritura nueva", () => {
+  for (const f of ["reporte_ventas_refacciones", "reporte_ventas_refacciones_totales", "kardex_refacciones_multi", "resumen_rotacion_refacciones_filtrado", "kardex_refaccion", "resumen_rotacion_refacciones"]) {
     assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
   }
   assert.equal(decidir("POST", "/rest/v1/rpc/reporte_ventas_refacciones_otra").status, 403);
