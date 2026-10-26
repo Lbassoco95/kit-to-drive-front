@@ -92,3 +92,13 @@ test("firmas electrónicas: tablas, bucket y la función firmas con sesión", ()
   assert.equal(f.requiereSesion, true);
   assert.equal(decidir("GET", "/rest/v1/firmas_usuario").status, 403);
 });
+
+test("Paquete 3: eliminar y cambiar fecha de remisión por RPC; el historial de fechas se lee pero no se escribe a mano", () => {
+  for (const f of ["eliminar_remision", "cambiar_fecha_remision", "modo_prueba_global_activo", "fijar_modo_prueba_global"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
+  }
+  assert.equal(decidir("GET", "/rest/v1/remision_fecha_cambios").ok, true);
+  // las funciones de apoyo (de trigger) no son RPC del front
+  for (const f of ["proteger_modo_prueba_global", "remision_fecha_solo_por_funcion"]) assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).status, 403, f);
+});
+
