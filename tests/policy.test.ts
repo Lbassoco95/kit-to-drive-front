@@ -60,3 +60,11 @@ test("rolDelToken lee el rol y rechaza lo que no es JWT", () => {
   assert.equal(rolDelToken("Bearer dummy"), null);
   assert.equal(rolDelToken(undefined), null);
 });
+
+test("Paquete 1: el catálogo básico de clientes (RPC) pasa; la tabla de clientes sigue protegida por la base, no por la compuerta", () => {
+  assert.equal(decidir("POST", "/rest/v1/rpc/catalogo_clientes_basico").ok, true);
+  assert.equal(decidir("GET", "/rest/v1/rpc/catalogo_clientes_basico").ok, true);
+  // las funciones auxiliares del paquete (triggers) no son RPC del front
+  assert.equal(decidir("POST", "/rest/v1/rpc/es_vendedor_comercial").status, 403);
+  assert.equal(decidir("POST", "/rest/v1/rpc/clientes_asignar_vendedor_al_crear").status, 403);
+});

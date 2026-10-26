@@ -26,7 +26,7 @@ export const RPCS = new Set([
   "actualizar_envio_remision_refaccion", "ajustar_capacidad_color", "ajustar_unidades_remision",
   "asignar_motocarro_a_remision", "asignar_remision_items", "cambiar_color_chasis",
   "cambiar_orden_armado", "cancelar_linea_refaccion", "cancelar_remision_refacciones",
-  "capturar_seriales_unidad", "compras_parametro", "configurar_pedido_remision", "configurar_unidad",
+  "capturar_seriales_unidad", "catalogo_clientes_basico", "compras_parametro", "configurar_pedido_remision", "configurar_unidad",
   "confirmar_fecha_entrega", "confirmar_sin_existencia_refaccion", "crear_motocarro_ya_armado",
   "crear_remision_refacciones", "cxc_vencidas_resumen", "desasignar_motocarro_de_remision",
   "desconfigurar_unidad", "entregar_remision_refaccion", "es_usuario_prueba",
