@@ -23,7 +23,10 @@ export function crearApp(cfg: Config): Express {
     if (origen && cfg.origenes.includes(origen)) {
       res.setHeader("Access-Control-Allow-Origin", origen);
       res.setHeader("Vary", "Origin");
-      res.setHeader("Access-Control-Allow-Headers", "authorization, content-type, apikey, x-client-info, prefer, range, x-upsert, accept-profile, content-profile");
+      // Se devuelven las cabeceras que el navegador pide (supabase-js agrega
+      // varias, p. ej. x-supabase-api-version); el origen ya está validado.
+      const pedidas = req.headers["access-control-request-headers"];
+      res.setHeader("Access-Control-Allow-Headers", typeof pedidas === "string" && pedidas ? pedidas : "authorization, content-type, apikey, x-client-info, x-supabase-api-version, prefer, range, x-upsert");
       res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS");
       res.setHeader("Access-Control-Expose-Headers", "content-range, etag");
       res.setHeader("Access-Control-Max-Age", "600");

@@ -77,3 +77,12 @@ test("CORS: solo el origen del front", async () => {
   const pre = await fetch(`${base}/rest/v1/clientes`, { method: "OPTIONS", headers: { origin: "https://malo.test" } });
   assert.equal(pre.status, 403);
 });
+
+test("CORS: el preflight acepta las cabeceras que pide supabase-js", async () => {
+  const pre = await fetch(`${base}/auth/v1/token?grant_type=password`, {
+    method: "OPTIONS",
+    headers: { origin: "https://front.test", "access-control-request-method": "POST", "access-control-request-headers": "apikey,content-type,x-client-info,x-supabase-api-version" },
+  });
+  assert.equal(pre.status, 204);
+  assert.match(pre.headers.get("access-control-allow-headers") ?? "", /x-supabase-api-version/);
+});
