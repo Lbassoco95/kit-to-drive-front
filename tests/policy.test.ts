@@ -28,7 +28,7 @@ test("flujo de dinero: sólo la vista y las funciones flujo_*; las tablas no se 
 });
 
 test("unificación: el libro, las cuentas y los abonos solo se leen; el dinero entra por el flujo", () => {
-  for (const t of ["movimientos_financieros", "cuentas_financieras", "cxc_abonos", "cuentas_por_cobrar", "empresas_grupo"]) {
+  for (const t of ["movimientos_financieros", "cuentas_financieras", "cxc_abonos", "empresas_grupo"]) {
     assert.equal(decidir("GET", `/rest/v1/${t}`).ok, true, t);
     for (const m of ["POST", "PATCH", "DELETE"]) assert.equal(decidir(m, `/rest/v1/${t}`).status, 403, `${m} ${t}`);
   }

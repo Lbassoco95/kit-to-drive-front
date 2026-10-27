@@ -86,7 +86,7 @@ export const MODULO_DE_ESCRITURA: Record<string, string> = {
 // Tablas que el front solo LEE: todo movimiento de dinero entra por el flujo (RPC flujo_*). La base también
 // les quita la escritura; aquí se cierra la puerta antes de llegar a ella.
 export const SOLO_LECTURA = new Set([
-  "movimientos_financieros", "cuentas_financieras", "cxc_abonos", "cuentas_por_cobrar", "empresas_grupo", "catalogo_bancos_bitacora",
+  "movimientos_financieros", "cuentas_financieras", "cxc_abonos", "empresas_grupo", "catalogo_bancos_bitacora",
   "cobranza_aplicaciones",
 ]);
 
