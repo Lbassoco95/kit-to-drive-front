@@ -1,5 +1,5 @@
 import {
-  AUTH_PERMITIDAS, BUCKETS, FUNCIONES, MODULO_DE_ESCRITURA, RPCS, SIEMPRE_ENCENDIDOS, TABLAS,
+  AUTH_PERMITIDAS, BUCKETS, FUNCIONES, MODULO_DE_ESCRITURA, RPCS, SIEMPRE_ENCENDIDOS, SOLO_LECTURA, TABLAS,
 } from "./allowlist";
 
 export type Destino =
@@ -51,6 +51,7 @@ export function decidir(metodo: string, ruta: string): Decision {
     }
     if (!TABLAS.has(primero)) return no(403, "Tabla no permitida");
     if (!["GET", "HEAD", "POST", "PATCH", "DELETE"].includes(m)) return no(405, "Método no permitido");
+    if (ESCRITURA.has(m) && SOLO_LECTURA.has(primero)) return no(403, "Solo lectura: el dinero entra por el flujo");
     const modulo = ESCRITURA.has(m) ? MODULO_DE_ESCRITURA[primero] : undefined;
     return { ok: true, status: 200, requiereSesion: true, modulo, destino: { tipo: "rest", tabla: primero } };
   }

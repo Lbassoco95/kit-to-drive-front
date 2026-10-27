@@ -27,6 +27,23 @@ test("flujo de dinero: sólo la vista y las funciones flujo_*; las tablas no se 
   assert.equal(decidir("POST", "/rest/v1/rpc/flujo_dinero_sin_borrar").status, 403);
 });
 
+test("unificación: el libro, las cuentas y los abonos solo se leen; el dinero entra por el flujo", () => {
+  for (const t of ["movimientos_financieros", "cuentas_financieras", "cxc_abonos", "cuentas_por_cobrar", "empresas_grupo"]) {
+    assert.equal(decidir("GET", `/rest/v1/${t}`).ok, true, t);
+    for (const m of ["POST", "PATCH", "DELETE"]) assert.equal(decidir(m, `/rest/v1/${t}`).status, 403, `${m} ${t}`);
+  }
+  for (const f of ["registrar_pago_cobranza", "validar_pago_cobranza", "aplicar_pago_cobranza"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).status, 403, f);
+  }
+  for (const f of ["flujo_empresas", "flujo_buscar_remisiones", "flujo_cxc_cliente", "flujo_cambiar_cliente", "flujo_revertir",
+    "movimiento_cancelar", "movimiento_ajustar", "movimiento_comprobar", "empresa_guardar", "cuenta_guardar", "revertir_pago_cobranza"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
+  }
+  for (const v of ["v_saldos_por_empresa", "v_flujo_en_transito", "v_flujo_dinero_eventos", "catalogo_bancos_bitacora"]) {
+    assert.equal(decidir("GET", `/rest/v1/${v}`).ok, true, v);
+  }
+});
+
 test("no se puede escapar con rutas disfrazadas", () => {
   assert.equal(decidir("GET", "/rest/v1/../auth/v1/admin/users").ok, false);
   assert.equal(decidir("GET", "/rest/v1/%2e%2e/auth/v1/admin/users").ok, false);
@@ -78,7 +95,7 @@ test("lo que el front usa vía ayudantes también pasa (regresión «Tabla no pe
   for (const t of ["remision_refaccion_items", "remision_refaccion_eventos", "almacen_refacciones_producto_compat", "historial_conexiones"]) {
     assert.equal(decidir("GET", `/rest/v1/${t}`).ok, true, t);
   }
-  for (const f of ["registrar_pago_cobranza", "crear_compra_refacciones", "cliente_tiene_cxc_vencidas"]) {
+  for (const f of ["crear_compra_refacciones", "cliente_tiene_cxc_vencidas"]) {
     assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
   }
 });

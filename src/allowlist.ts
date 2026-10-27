@@ -21,6 +21,7 @@ export const TABLAS = new Set([
   "v_cobranza_pagos", "v_cobranza_remisiones", "v_cobranza_saldos_favor",
   "v_compra_refacciones_contenedor", "v_flujo_dinero", "v_movimientos_financieros", "v_remision_refaccion_ordenes",
   "v_saldos_cuentas", "v_stock_modelo_color",
+  "empresas_grupo", "catalogo_bancos_bitacora", "v_saldos_por_empresa", "v_flujo_en_transito", "v_flujo_dinero_eventos",
   "almacen_refacciones_producto_compat", "historial_conexiones", "remision_refaccion_eventos", "remision_refaccion_items",
 ]);
 
@@ -34,7 +35,9 @@ export const RPCS = new Set([
   "desconfigurar_unidad", "eliminar_articulo_refaccion", "eliminar_compra_refacciones", "entregar_remision_refaccion", "es_super_admin", "es_usuario_prueba",
   "estado_cobro_remision_refaccion", "flujo_aplicar", "flujo_asignar_capacidad", "flujo_clientes",
   "flujo_confirmar_caja", "flujo_cuentas", "flujo_listar_capacidades", "flujo_mis_capacidades",
-  "flujo_recibir", "flujo_rechazar", "flujo_remisiones_para_aplicar", "importar_almacen_refacciones", "importar_motores_inventario",
+  "flujo_recibir", "flujo_rechazar", "flujo_remisiones_para_aplicar",
+  "flujo_empresas", "flujo_buscar_remisiones", "flujo_cxc_cliente", "flujo_cambiar_cliente", "flujo_revertir",
+  "movimiento_cancelar", "movimiento_ajustar", "movimiento_comprobar", "empresa_guardar", "cuenta_guardar", "importar_almacen_refacciones", "importar_motores_inventario",
   "importar_packing_list", "importar_vins_inventario", "intercambiar_color_chasis",
   "kardex_refaccion", "liberar_refaccion_remision", "marcar_pago_remision_con_evidencia",
   "marcar_remision_entregada", "marcar_unidad_entregada", "proponer_fecha_entrega",
@@ -46,7 +49,7 @@ export const RPCS = new Set([
   "revisar_incidencia_chasis", "saldo_favor_disponible_cliente", "saldo_refaccion_a_fecha",
   "saldos_atipicos_refacciones", "salidas_por_cliente_mes", "sincronizar_compat_refacciones",
   "usuarios_asignables", "ventas_mensuales_refacciones",
-  "actualizar_articulo_refaccion", "alta_articulo_refaccion", "aplicar_ajuste_rapido", "aplicar_datos_maestros_refacciones", "aplicar_pago_cobranza", "aplicar_saldo_favor", "cancelar_compra_refacciones", "cliente_tiene_cxc_vencidas", "confirmar_compra_refacciones", "confirmar_compras_refacciones", "corregir_remision_refaccion", "crear_compra_refacciones", "dividir_compra_refacciones", "guardar_almacen_inventario", "guardar_equivalente_ecount", "guardar_motivo_ajuste", "proponer_conteo_fisico", "registrar_pago_cobranza", "registrar_recepcion_refacciones", "reiniciar_datos_prueba_compras", "resolver_pendiente_compra_refacciones", "revertir_pago_cobranza", "revisar_propuesta_ajuste", "sembrar_datos_prueba_compras", "solicitar_saldo_favor", "unificar_unidades_refacciones", "validar_pago_cobranza",
+  "actualizar_articulo_refaccion", "alta_articulo_refaccion", "aplicar_ajuste_rapido", "aplicar_datos_maestros_refacciones", "aplicar_saldo_favor", "cancelar_compra_refacciones", "cliente_tiene_cxc_vencidas", "confirmar_compra_refacciones", "confirmar_compras_refacciones", "corregir_remision_refaccion", "crear_compra_refacciones", "dividir_compra_refacciones", "guardar_almacen_inventario", "guardar_equivalente_ecount", "guardar_motivo_ajuste", "proponer_conteo_fisico", "registrar_recepcion_refacciones", "reiniciar_datos_prueba_compras", "resolver_pendiente_compra_refacciones", "revertir_pago_cobranza", "revisar_propuesta_ajuste", "sembrar_datos_prueba_compras", "solicitar_saldo_favor", "unificar_unidades_refacciones", 
 ]);
 
 export const BUCKETS = new Set([
@@ -79,5 +82,12 @@ export const MODULO_DE_ESCRITURA: Record<string, string> = {
   reportes_turno: "reportesTurno", tareas: "tareas",
   ajustes_inventario: "inventarioFisico",
 };
+
+// Tablas que el front solo LEE: todo movimiento de dinero entra por el flujo (RPC flujo_*). La base también
+// les quita la escritura; aquí se cierra la puerta antes de llegar a ella.
+export const SOLO_LECTURA = new Set([
+  "movimientos_financieros", "cuentas_financieras", "cxc_abonos", "cuentas_por_cobrar", "empresas_grupo", "catalogo_bancos_bitacora",
+  "cobranza_aplicaciones",
+]);
 
 export const SIEMPRE_ENCENDIDOS = new Set(["dashboard", "usuarios", "configuracion"]);
