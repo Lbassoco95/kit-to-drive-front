@@ -37,7 +37,9 @@ export const RPCS = new Set([
   "flujo_confirmar_caja", "flujo_cuentas", "flujo_listar_capacidades", "flujo_mis_capacidades",
   "flujo_recibir", "flujo_rechazar", "flujo_remisiones_para_aplicar",
   "flujo_empresas", "flujo_buscar_remisiones", "flujo_cxc_cliente", "flujo_cambiar_cliente", "flujo_revertir",
-  "movimiento_cancelar", "movimiento_ajustar", "movimiento_comprobar", "empresa_guardar", "cuenta_guardar", "importar_almacen_refacciones", "importar_motores_inventario",
+  "movimiento_cancelar", "movimiento_ajustar", "movimiento_comprobar", "empresa_guardar", "cuenta_guardar",
+  "flujo_capturar_gasto", "flujo_confirmar_gasto", "flujo_entregar_gasto", "flujo_rechazar_gasto", "flujo_corregir_gasto",
+  "flujo_cuentas_gasto", "flujo_categorias_gasto", "flujo_saldo_cuenta", "categoria_guardar", "movimiento_conciliar", "importar_almacen_refacciones", "importar_motores_inventario",
   "importar_packing_list", "importar_vins_inventario", "intercambiar_color_chasis",
   "kardex_refaccion", "liberar_refaccion_remision", "marcar_pago_remision_con_evidencia",
   "marcar_remision_entregada", "marcar_unidad_entregada", "proponer_fecha_entrega",
@@ -87,7 +89,7 @@ export const MODULO_DE_ESCRITURA: Record<string, string> = {
 // les quita la escritura; aquí se cierra la puerta antes de llegar a ella.
 export const SOLO_LECTURA = new Set([
   "movimientos_financieros", "cuentas_financieras", "cxc_abonos", "empresas_grupo", "catalogo_bancos_bitacora",
-  "cobranza_aplicaciones",
+  "cobranza_aplicaciones", "categorias_financieras",
 ]);
 
 export const SIEMPRE_ENCENDIDOS = new Set(["dashboard", "usuarios", "configuracion"]);

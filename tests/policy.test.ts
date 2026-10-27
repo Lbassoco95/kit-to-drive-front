@@ -44,6 +44,19 @@ test("unificación: el libro, las cuentas y los abonos solo se leen; el dinero e
   }
 });
 
+test("gastos, categorías y conciliación: solo las funciones nuevas; las funciones de regularización no se abren al front", () => {
+  for (const f of ["flujo_capturar_gasto", "flujo_confirmar_gasto", "flujo_entregar_gasto", "flujo_rechazar_gasto", "flujo_corregir_gasto",
+    "flujo_cuentas_gasto", "flujo_categorias_gasto", "flujo_saldo_cuenta", "categoria_guardar", "movimiento_conciliar"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
+  }
+  // Regularizar, reclasificar y resolver históricos se corren con el procedimiento del back, no desde el front.
+  for (const f of ["movimiento_regularizar", "movimiento_reclasificar_cuenta", "movimiento_historico_resolver", "cobranza_pago_regularizar"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).status, 403, f);
+  }
+  assert.equal(decidir("GET", "/rest/v1/categorias_financieras").ok, true);
+  for (const m of ["POST", "PATCH", "DELETE"]) assert.equal(decidir(m, "/rest/v1/categorias_financieras").status, 403, m);
+});
+
 test("no se puede escapar con rutas disfrazadas", () => {
   assert.equal(decidir("GET", "/rest/v1/../auth/v1/admin/users").ok, false);
   assert.equal(decidir("GET", "/rest/v1/%2e%2e/auth/v1/admin/users").ok, false);
