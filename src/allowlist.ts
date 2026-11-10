@@ -34,7 +34,7 @@ export const RPCS = new Set([
   "desconfigurar_unidad", "eliminar_articulo_refaccion", "eliminar_compra_refacciones", "eliminar_remision_refacciones", "reporte_ventas_refacciones", "entregar_remision_refaccion", "es_super_admin", "es_usuario_prueba",
   "estado_cobro_remision_refaccion", "flujo_aplicar", "flujo_asignar_capacidad", "flujo_clientes",
   "flujo_comprobar", "flujo_conciliacion", "flujo_confirmar_caja", "flujo_cuentas", "flujo_listar_capacidades", "flujo_mis_capacidades",
-  "flujo_recibir", "flujo_registrar_movimiento", "flujo_corregir", "flujo_crear_cuenta", "flujo_categorias", "flujo_crear_cuenta_empresa", "flujo_editar_cuenta", "flujo_desactivar_cuenta", "flujo_agregar_institucion", "flujo_instituciones", "flujo_rechazar", "flujo_remisiones_para_aplicar", "importar_almacen_refacciones", "importar_motores_inventario",
+  "flujo_recibir", "flujo_registrar_movimiento", "flujo_corregir", "flujo_crear_cuenta", "flujo_categorias", "flujo_crear_categoria", "flujo_crear_cuenta_empresa", "flujo_editar_cuenta", "flujo_desactivar_cuenta", "flujo_agregar_institucion", "flujo_instituciones", "flujo_rechazar", "flujo_remisiones_para_aplicar", "importar_almacen_refacciones", "importar_motores_inventario",
   "importar_packing_list", "importar_vins_inventario", "intercambiar_color_chasis",
   "kardex_refaccion", "liberar_refaccion_remision", "marcar_pago_remision_con_evidencia",
   "marcar_remision_entregada", "marcar_unidad_entregada", "proponer_fecha_entrega",
