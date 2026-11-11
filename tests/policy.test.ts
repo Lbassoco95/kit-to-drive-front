@@ -72,3 +72,12 @@ test("Recursos Humanos: tablas, RPC y buckets abiertos; la escritura depende del
   // Lo que RH no expone sigue cerrado.
   assert.equal(decidir("POST", "/rest/v1/rpc/rh_resultado_ubicacion").status, 403);
 });
+
+test("RH: aviso, contratos y envío de accesos quedan abiertos; las tablas de contratos no se escriben directo", () => {
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_contrato_firmado").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_vincular_usuario").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_publicar_aviso").ok, true);
+  assert.equal(decidir("POST", "/functions/v1/rh-enviar-accesos").ok, true);
+  assert.equal(decidir("GET", "/rest/v1/rh_contratos").ok, true);
+  assert.equal(decidir("GET", "/rest/v1/rh_avisos_privacidad").ok, true);
+});

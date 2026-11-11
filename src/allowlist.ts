@@ -21,7 +21,8 @@ export const TABLAS = new Set([
   "v_compra_refacciones_contenedor", "v_movimientos_financieros", "v_remision_refaccion_ordenes",
   "v_saldos_cuentas", "v_stock_modelo_color",
   // Recursos Humanos
-  "rh_acceso", "rh_areas", "rh_puestos", "rh_tipos_documento", "rh_tipos_solicitud", "rh_parametros", "rh_biblioteca_categorias", "rh_empleados", "rh_empleado_datos", "rh_documentos", "rh_biblioteca_documentos", "rh_biblioteca_publico", "rh_biblioteca_versiones", "rh_biblioteca_lecturas", "rh_publicaciones", "rh_oficinas", "rh_horarios", "rh_dias_inhabiles", "rh_asistencia", "rh_asistencia_ubicacion", "rh_asistencia_correcciones", "rh_solicitudes", "rh_vacaciones_saldos", "rh_bitacora_accesos", "v_rh_directorio", "v_rh_vacaciones",
+  "rh_acceso", "rh_areas", "rh_puestos", "rh_tipos_documento", "rh_tipos_solicitud", "rh_parametros", "rh_biblioteca_categorias", "rh_empleados", "rh_empleado_datos", "rh_documentos", "rh_biblioteca_documentos", "rh_biblioteca_publico", "rh_biblioteca_versiones", "rh_biblioteca_lecturas", "rh_publicaciones", "rh_oficinas", "rh_horarios", "rh_dias_inhabiles", "rh_asistencia", "rh_asistencia_ubicacion", "rh_asistencia_correcciones", "rh_solicitudes", "rh_vacaciones_saldos", "rh_bitacora_accesos", "v_rh_directorio", "v_rh_vacaciones", "rh_avisos_privacidad", "rh_avisos_aceptaciones", "rh_contratos",
+  "rh_avisos_privacidad", "rh_avisos_aceptaciones", "rh_contratos",
 ]);
 
 export const RPCS = new Set([
@@ -45,7 +46,7 @@ export const RPCS = new Set([
   "saldos_atipicos_refacciones", "salidas_por_cliente_mes", "sincronizar_compat_refacciones",
   "usuarios_asignables", "ventas_mensuales_refacciones",
   // Recursos Humanos
-  "rh_es_rh", "rh_sincronizar_plantilla", "rh_registrar_acceso", "rh_registrar_lectura", "rh_biblioteca_nueva_version", "rh_marcar_entrada", "rh_marcar_salida", "rh_corregir_asistencia", "rh_crear_solicitud", "rh_resolver_solicitud", "rh_cancelar_solicitud", "rh_faltas", "rh_dias_habiles",
+  "rh_es_rh", "rh_sincronizar_plantilla", "rh_registrar_acceso", "rh_registrar_lectura", "rh_biblioteca_nueva_version", "rh_marcar_entrada", "rh_marcar_salida", "rh_corregir_asistencia", "rh_crear_solicitud", "rh_resolver_solicitud", "rh_cancelar_solicitud", "rh_faltas", "rh_dias_habiles", "rh_publicar_aviso", "rh_aceptar_aviso", "rh_cerrar_jornadas_vencidas", "rh_contrato_enviado", "rh_contrato_firmado", "rh_vincular_usuario",
 ]);
 
 export const BUCKETS = new Set([
@@ -55,6 +56,7 @@ export const BUCKETS = new Set([
 
 export const FUNCIONES = new Set([
   "admin-create-user", "admin-reset-user-password", "admin-update-user", "complete-password-change",
+  "rh-enviar-accesos",
 ]);
 
 // Rutas de autenticación permitidas (no hay registro público ni rutas admin).
