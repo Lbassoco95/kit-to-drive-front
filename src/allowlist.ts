@@ -20,6 +20,8 @@ export const TABLAS = new Set([
   "v_cobranza_pagos", "v_cobranza_remisiones", "v_cobranza_saldos_favor",
   "v_compra_refacciones_contenedor", "v_movimientos_financieros", "v_remision_refaccion_ordenes",
   "v_saldos_cuentas", "v_stock_modelo_color",
+  // Recursos Humanos
+  "rh_acceso", "rh_areas", "rh_puestos", "rh_tipos_documento", "rh_tipos_solicitud", "rh_parametros", "rh_biblioteca_categorias", "rh_empleados", "rh_empleado_datos", "rh_documentos", "rh_biblioteca_documentos", "rh_biblioteca_publico", "rh_biblioteca_versiones", "rh_biblioteca_lecturas", "rh_publicaciones", "rh_oficinas", "rh_horarios", "rh_dias_inhabiles", "rh_asistencia", "rh_asistencia_ubicacion", "rh_asistencia_correcciones", "rh_solicitudes", "rh_vacaciones_saldos", "rh_bitacora_accesos", "v_rh_directorio", "v_rh_vacaciones",
 ]);
 
 export const RPCS = new Set([
@@ -42,10 +44,13 @@ export const RPCS = new Set([
   "revisar_incidencia_chasis", "saldo_favor_disponible_cliente", "saldo_refaccion_a_fecha",
   "saldos_atipicos_refacciones", "salidas_por_cliente_mes", "sincronizar_compat_refacciones",
   "usuarios_asignables", "ventas_mensuales_refacciones",
+  // Recursos Humanos
+  "rh_es_rh", "rh_sincronizar_plantilla", "rh_registrar_acceso", "rh_registrar_lectura", "rh_biblioteca_nueva_version", "rh_marcar_entrada", "rh_marcar_salida", "rh_corregir_asistencia", "rh_crear_solicitud", "rh_resolver_solicitud", "rh_cancelar_solicitud", "rh_faltas", "rh_dias_habiles",
 ]);
 
 export const BUCKETS = new Set([
   "actividades-evidencia", "comentarios-fotos", "evidencias-compras", "remisiones-docs",
+  "rh-expedientes", "rh-biblioteca",
 ]);
 
 export const FUNCIONES = new Set([
@@ -72,6 +77,25 @@ export const MODULO_DE_ESCRITURA: Record<string, string> = {
   remision_refaccion_correcciones: "remisionesRefacciones",
   reportes_turno: "reportesTurno", tareas: "tareas",
   ajustes_inventario: "inventarioFisico",
+  // Recursos Humanos: si el módulo está apagado, no se escribe en sus tablas.
+  rh_areas: "rh",
+  rh_puestos: "rh",
+  rh_tipos_documento: "rh",
+  rh_tipos_solicitud: "rh",
+  rh_parametros: "rh",
+  rh_biblioteca_categorias: "rh",
+  rh_empleados: "rh",
+  rh_empleado_datos: "rh",
+  rh_documentos: "rh",
+  rh_biblioteca_documentos: "rh",
+  rh_biblioteca_publico: "rh",
+  rh_biblioteca_versiones: "rh",
+  rh_publicaciones: "rh",
+  rh_oficinas: "rh",
+  rh_horarios: "rh",
+  rh_dias_inhabiles: "rh",
+  rh_vacaciones_saldos: "rh",
+  rh_acceso: "rh",
 };
 
 export const SIEMPRE_ENCENDIDOS = new Set(["dashboard", "usuarios", "configuracion"]);
