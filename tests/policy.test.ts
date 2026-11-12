@@ -113,3 +113,12 @@ test("RH: aviso, contratos y envío de accesos quedan abiertos; las tablas de co
   assert.equal(decidir("GET", "/rest/v1/rh_contratos").ok, true);
   assert.equal(decidir("GET", "/rest/v1/rh_avisos_privacidad").ok, true);
 });
+
+test("RH: migrar usuarios, correcciones con motivo e historial quedan abiertos; el historial no se escribe directo", () => {
+  for (const f of ["rh_alta_trabajador", "rh_alta_trabajadores", "rh_quitar_trabajador", "rh_usuarios_sin_ficha",
+    "rh_usuarios_trabajadores", "rh_guardar_datos", "rh_actualizar_empleado", "rh_eliminar_documento"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
+  }
+  assert.equal(decidir("GET", "/rest/v1/rh_bitacora_cambios").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_auditar").status, 403);
+});

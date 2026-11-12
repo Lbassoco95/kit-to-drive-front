@@ -23,7 +23,7 @@ export const TABLAS = new Set([
   "v_saldos_cuentas", "v_stock_modelo_color",
   "almacen_refacciones_producto_compat", "historial_conexiones", "remision_refaccion_eventos", "remision_refaccion_items",
   // Recursos Humanos
-  "rh_acceso", "rh_areas", "rh_puestos", "rh_tipos_documento", "rh_tipos_solicitud", "rh_parametros", "rh_biblioteca_categorias", "rh_empleados", "rh_empleado_datos", "rh_documentos", "rh_biblioteca_documentos", "rh_biblioteca_publico", "rh_biblioteca_versiones", "rh_biblioteca_lecturas", "rh_publicaciones", "rh_oficinas", "rh_horarios", "rh_dias_inhabiles", "rh_asistencia", "rh_asistencia_ubicacion", "rh_asistencia_correcciones", "rh_solicitudes", "rh_vacaciones_saldos", "rh_bitacora_accesos", "v_rh_directorio", "v_rh_vacaciones", "rh_avisos_privacidad", "rh_avisos_aceptaciones", "rh_contratos",
+  "rh_acceso", "rh_areas", "rh_puestos", "rh_tipos_documento", "rh_tipos_solicitud", "rh_parametros", "rh_biblioteca_categorias", "rh_empleados", "rh_empleado_datos", "rh_documentos", "rh_biblioteca_documentos", "rh_biblioteca_publico", "rh_biblioteca_versiones", "rh_biblioteca_lecturas", "rh_publicaciones", "rh_oficinas", "rh_horarios", "rh_dias_inhabiles", "rh_asistencia", "rh_asistencia_ubicacion", "rh_asistencia_correcciones", "rh_solicitudes", "rh_vacaciones_saldos", "rh_bitacora_accesos", "v_rh_directorio", "v_rh_vacaciones", "rh_avisos_privacidad", "rh_avisos_aceptaciones", "rh_contratos", "rh_bitacora_cambios",
 ]);
 
 export const RPCS = new Set([
@@ -51,6 +51,7 @@ export const RPCS = new Set([
   "actualizar_articulo_refaccion", "alta_articulo_refaccion", "aplicar_ajuste_rapido", "aplicar_datos_maestros_refacciones", "aplicar_pago_cobranza", "aplicar_saldo_favor", "cancelar_compra_refacciones", "cliente_tiene_cxc_vencidas", "confirmar_compra_refacciones", "confirmar_compras_refacciones", "corregir_remision_refaccion", "crear_compra_refacciones", "dividir_compra_refacciones", "guardar_almacen_inventario", "guardar_equivalente_ecount", "guardar_motivo_ajuste", "proponer_conteo_fisico", "registrar_pago_cobranza", "registrar_recepcion_refacciones", "reiniciar_datos_prueba_compras", "resolver_pendiente_compra_refacciones", "revertir_pago_cobranza", "revisar_propuesta_ajuste", "sembrar_datos_prueba_compras", "solicitar_saldo_favor", "unificar_unidades_refacciones", "validar_pago_cobranza",
   // Recursos Humanos
   "rh_es_rh", "rh_sincronizar_plantilla", "rh_registrar_acceso", "rh_registrar_lectura", "rh_biblioteca_nueva_version", "rh_marcar_entrada", "rh_marcar_salida", "rh_corregir_asistencia", "rh_crear_solicitud", "rh_resolver_solicitud", "rh_cancelar_solicitud", "rh_faltas", "rh_dias_habiles", "rh_publicar_aviso", "rh_aceptar_aviso", "rh_cerrar_jornadas_vencidas", "rh_contrato_enviado", "rh_contrato_firmado", "rh_vincular_usuario",
+  "rh_alta_trabajador", "rh_alta_trabajadores", "rh_quitar_trabajador", "rh_usuarios_sin_ficha", "rh_usuarios_trabajadores", "rh_guardar_datos", "rh_actualizar_empleado", "rh_eliminar_documento",
 ]);
 
 export const BUCKETS = new Set([
