@@ -7,6 +7,7 @@ const jwt = (role: string) => `Bearer h.${Buffer.from(JSON.stringify({ role })).
 test("tabla y RPC permitidas pasan; las demás, 403", () => {
   assert.equal(decidir("GET", "/rest/v1/remisiones").ok, true);
   assert.equal(decidir("POST", "/rest/v1/rpc/recibir_contenedor").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/asignar_vendedor_remision").ok, true);
   assert.equal(decidir("GET", "/rest/v1/pg_catalog").status, 403);
   assert.equal(decidir("GET", "/rest/v1/").status, 403);
   assert.equal(decidir("POST", "/rest/v1/rpc/patio_kit_set_user_role").status, 403);
@@ -14,7 +15,19 @@ test("tabla y RPC permitidas pasan; las demás, 403", () => {
   assert.equal(decidir("GET", "/rest/v1/bridge_bitacora").status, 403);
 });
 
-test("flujo de dinero: sus RPC y la vista pasan; los helpers internos no", () => {
+test("flujo de dinero: sólo la vista y las funciones flujo_*; las tablas no se tocan directo", () => {
+  assert.equal(decidir("GET", "/rest/v1/v_flujo_dinero").ok, true);
+  for (const f of ["flujo_recibir", "flujo_confirmar_caja", "flujo_aplicar", "flujo_rechazar", "flujo_mis_capacidades",
+    "flujo_listar_capacidades", "flujo_asignar_capacidad", "flujo_cuentas", "flujo_clientes", "flujo_remisiones_para_aplicar"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
+  }
+  assert.equal(decidir("GET", "/rest/v1/flujo_dinero").status, 403);
+  assert.equal(decidir("PATCH", "/rest/v1/flujo_dinero").status, 403);
+  assert.equal(decidir("GET", "/rest/v1/flujo_capacidades").status, 403);
+  assert.equal(decidir("POST", "/rest/v1/rpc/flujo_dinero_sin_borrar").status, 403);
+});
+
+test("flujo de dinero: RPC de formulario, cuentas y categorías pasan; helpers internos no", () => {
   for (const f of ["flujo_registrar_movimiento", "flujo_crear_categoria", "flujo_cuentas", "flujo_corregir"]) {
     assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
   }
@@ -68,4 +81,53 @@ test("rolDelToken lee el rol y rechaza lo que no es JWT", () => {
   assert.equal(rolDelToken(jwt("anon")), "anon");
   assert.equal(rolDelToken("Bearer dummy"), null);
   assert.equal(rolDelToken(undefined), null);
+});
+
+test("lo que el front usa vía ayudantes también pasa (regresión «Tabla no permitida»)", () => {
+  for (const t of ["remision_refaccion_items", "remision_refaccion_eventos", "almacen_refacciones_producto_compat", "historial_conexiones"]) {
+    assert.equal(decidir("GET", `/rest/v1/${t}`).ok, true, t);
+  }
+  for (const f of ["registrar_pago_cobranza", "crear_compra_refacciones", "cliente_tiene_cxc_vencidas"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
+  }
+});
+
+test("firmas electrónicas: tablas, bucket y la función firmas con sesión", () => {
+  assert.equal(decidir("GET", "/rest/v1/firmas_solicitudes").ok, true);
+  assert.equal(decidir("GET", "/rest/v1/firmas_firmantes").ok, true);
+  assert.equal(decidir("POST", "/storage/v1/object/sign/firmas/abc/original.pdf").ok, true);
+  const f = decidir("POST", "/functions/v1/firmas");
+  assert.equal(f.ok, true);
+  assert.equal(f.requiereSesion, true);
+  assert.equal(decidir("GET", "/rest/v1/firmas_usuario").status, 403);
+});
+
+test("Recursos Humanos: tablas, RPC y buckets abiertos; la escritura depende del módulo rh", () => {
+  assert.equal(decidir("GET", "/rest/v1/v_rh_directorio").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_marcar_entrada").ok, true);
+  assert.equal(decidir("GET", "/storage/v1/object/sign/rh-expedientes/x/y.pdf").ok, true);
+  assert.equal(decidir("PATCH", "/rest/v1/rh_empleados").modulo, "rh");
+  assert.equal(decidir("POST", "/rest/v1/rh_documentos").modulo, "rh");
+  assert.equal(decidir("GET", "/rest/v1/rh_empleados").modulo, undefined);
+  assert.equal(moduloEncendido("rh", new Set(["rh"])), false);
+  // Lo que RH no expone sigue cerrado.
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_resultado_ubicacion").status, 403);
+});
+
+test("RH: aviso, contratos y envío de accesos quedan abiertos; las tablas de contratos no se escriben directo", () => {
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_contrato_firmado").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_vincular_usuario").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_publicar_aviso").ok, true);
+  assert.equal(decidir("POST", "/functions/v1/rh-enviar-accesos").ok, true);
+  assert.equal(decidir("GET", "/rest/v1/rh_contratos").ok, true);
+  assert.equal(decidir("GET", "/rest/v1/rh_avisos_privacidad").ok, true);
+});
+
+test("RH: migrar usuarios, correcciones con motivo e historial quedan abiertos; el historial no se escribe directo", () => {
+  for (const f of ["rh_alta_trabajador", "rh_alta_trabajadores", "rh_quitar_trabajador", "rh_usuarios_sin_ficha",
+    "rh_usuarios_trabajadores", "rh_guardar_datos", "rh_actualizar_empleado", "rh_eliminar_documento"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
+  }
+  assert.equal(decidir("GET", "/rest/v1/rh_bitacora_cambios").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/rh_auditar").status, 403);
 });
