@@ -56,6 +56,8 @@ export const RPCS = new Set([
   "flujo_editar_categoria", "flujo_resumen_aplicacion",
   // Traspasos entre cuentas y compra/venta de dólares.
   "traspaso_confirmar", "traspaso_cuentas", "traspaso_listar", "traspaso_rechazar", "traspaso_revertir", "traspaso_solicitar",
+  // Alerta de saldo negativo (más de 3 días) en cuentas y cajas.
+  "saldo_negativo_alertas", "saldo_negativo_revisar", "saldo_negativo_validar",
 ]);
 
 export const BUCKETS = new Set([
