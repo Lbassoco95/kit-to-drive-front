@@ -41,7 +41,8 @@ export const RPCS = new Set([
   "resolver_incidencia_chasis", "responder_solicitud", "resumen_rotacion_refacciones",
   "revisar_incidencia_chasis", "saldo_favor_disponible_cliente", "saldo_refaccion_a_fecha",
   "saldos_atipicos_refacciones", "salidas_por_cliente_mes", "sincronizar_compat_refacciones",
-  "usuarios_asignables", "ventas_mensuales_refacciones",
+  "traspaso_confirmar", "traspaso_cuentas", "traspaso_listar", "traspaso_rechazar", "traspaso_revertir",
+  "traspaso_solicitar", "usuarios_asignables", "ventas_mensuales_refacciones",
 ]);
 
 export const BUCKETS = new Set([
