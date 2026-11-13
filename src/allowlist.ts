@@ -17,7 +17,7 @@ export const TABLAS = new Set([
   "remision_items", "remision_refaccion_correcciones", "remisiones", "remisiones_bitacora",
   "remisiones_refacciones", "reportes_turno", "soporte_mensajes", "soporte_tickets", "tareas",
   "user_roles", "v_almacen_refacciones", "v_carga_ya_armados", "v_clientes_credito",
-  "v_cobranza_pagos", "v_cobranza_remisiones", "v_cobranza_saldos_favor",
+  "v_cobranza_pagos", "v_cobranza_remisiones", "v_cobranza_saldos_favor", "v_flujo_dinero",
   "v_compra_refacciones_contenedor", "v_movimientos_financieros", "v_remision_refaccion_ordenes",
   "v_saldos_cuentas", "v_stock_modelo_color",
 ]);
@@ -42,6 +42,14 @@ export const RPCS = new Set([
   "revisar_incidencia_chasis", "saldo_favor_disponible_cliente", "saldo_refaccion_a_fecha",
   "saldos_atipicos_refacciones", "salidas_por_cliente_mes", "sincronizar_compat_refacciones",
   "usuarios_asignables", "ventas_mensuales_refacciones",
+  // Flujo de dinero (Control Financiero).
+  "flujo_agregar_institucion", "flujo_aplicar", "flujo_asignar_capacidad", "flujo_categorias",
+  "flujo_clientes", "flujo_comprobar", "flujo_conciliacion", "flujo_confirmar_caja",
+  "flujo_corregir", "flujo_crear_categoria", "flujo_crear_cuenta", "flujo_crear_cuenta_empresa",
+  "flujo_cuentas", "flujo_desactivar_cuenta", "flujo_editar_categoria", "flujo_editar_cuenta",
+  "flujo_instituciones", "flujo_listar_capacidades", "flujo_mis_capacidades", "flujo_rechazar",
+  "flujo_recibir", "flujo_registrar_movimiento", "flujo_remisiones_para_aplicar",
+  "flujo_resumen_aplicacion",
 ]);
 
 export const BUCKETS = new Set([

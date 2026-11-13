@@ -14,6 +14,15 @@ test("tabla y RPC permitidas pasan; las demás, 403", () => {
   assert.equal(decidir("GET", "/rest/v1/bridge_bitacora").status, 403);
 });
 
+test("flujo de dinero: sus RPC y la vista pasan; los helpers internos no", () => {
+  for (const f of ["flujo_registrar_movimiento", "flujo_crear_categoria", "flujo_cuentas", "flujo_corregir"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
+  }
+  assert.equal(decidir("GET", "/rest/v1/v_flujo_dinero").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/flujo_es_admin").status, 403);
+  assert.equal(decidir("POST", "/rest/v1/rpc/_espejo_flujo_sincronizar").status, 403);
+});
+
 test("no se puede escapar con rutas disfrazadas", () => {
   assert.equal(decidir("GET", "/rest/v1/../auth/v1/admin/users").ok, false);
   assert.equal(decidir("GET", "/rest/v1/%2e%2e/auth/v1/admin/users").ok, false);
