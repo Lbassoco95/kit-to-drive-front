@@ -54,6 +54,8 @@ export const RPCS = new Set([
   "rh_alta_trabajador", "rh_alta_trabajadores", "rh_quitar_trabajador", "rh_usuarios_sin_ficha", "rh_usuarios_trabajadores", "rh_guardar_datos", "rh_actualizar_empleado", "rh_eliminar_documento",
   // Flujo de dinero: las que faltaban (categorías y resumen de aplicación).
   "flujo_editar_categoria", "flujo_resumen_aplicacion",
+  // Traspasos entre cuentas y compra/venta de dólares.
+  "traspaso_confirmar", "traspaso_cuentas", "traspaso_listar", "traspaso_rechazar", "traspaso_revertir", "traspaso_solicitar",
 ]);
 
 export const BUCKETS = new Set([
