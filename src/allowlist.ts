@@ -52,6 +52,8 @@ export const RPCS = new Set([
   // Recursos Humanos
   "rh_es_rh", "rh_sincronizar_plantilla", "rh_registrar_acceso", "rh_registrar_lectura", "rh_biblioteca_nueva_version", "rh_marcar_entrada", "rh_marcar_salida", "rh_corregir_asistencia", "rh_crear_solicitud", "rh_resolver_solicitud", "rh_cancelar_solicitud", "rh_faltas", "rh_dias_habiles", "rh_publicar_aviso", "rh_aceptar_aviso", "rh_cerrar_jornadas_vencidas", "rh_contrato_enviado", "rh_contrato_firmado", "rh_vincular_usuario",
   "rh_alta_trabajador", "rh_alta_trabajadores", "rh_quitar_trabajador", "rh_usuarios_sin_ficha", "rh_usuarios_trabajadores", "rh_guardar_datos", "rh_actualizar_empleado", "rh_eliminar_documento",
+  // Flujo de dinero: las que faltaban (categorías y resumen de aplicación).
+  "flujo_editar_categoria", "flujo_resumen_aplicacion",
 ]);
 
 export const BUCKETS = new Set([

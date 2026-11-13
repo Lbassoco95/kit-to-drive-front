@@ -27,6 +27,15 @@ test("flujo de dinero: sólo la vista y las funciones flujo_*; las tablas no se 
   assert.equal(decidir("POST", "/rest/v1/rpc/flujo_dinero_sin_borrar").status, 403);
 });
 
+test("flujo de dinero: RPC de formulario, cuentas y categorías pasan; helpers internos no", () => {
+  for (const f of ["flujo_registrar_movimiento", "flujo_crear_categoria", "flujo_cuentas", "flujo_corregir"]) {
+    assert.equal(decidir("POST", `/rest/v1/rpc/${f}`).ok, true, f);
+  }
+  assert.equal(decidir("GET", "/rest/v1/v_flujo_dinero").ok, true);
+  assert.equal(decidir("POST", "/rest/v1/rpc/flujo_es_admin").status, 403);
+  assert.equal(decidir("POST", "/rest/v1/rpc/_espejo_flujo_sincronizar").status, 403);
+});
+
 test("no se puede escapar con rutas disfrazadas", () => {
   assert.equal(decidir("GET", "/rest/v1/../auth/v1/admin/users").ok, false);
   assert.equal(decidir("GET", "/rest/v1/%2e%2e/auth/v1/admin/users").ok, false);
