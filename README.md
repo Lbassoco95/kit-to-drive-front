@@ -25,3 +25,7 @@ Ver `.env.example`. `npm test` corre las pruebas; `npm run typecheck` los tipos.
 
 ## Para abrir una tabla nueva
 Agregarla a `src/allowlist.ts` en un cambio revisado.
+
+## Guía del equipo
+
+Qué comando corre cada protección y qué hacer al agregar una tabla, función o bucket: [`kit-to-drive-web/docs/guia-del-equipo.md`](https://github.com/Lbassoco95/kit-to-drive-web/blob/main/docs/guia-del-equipo.md).
